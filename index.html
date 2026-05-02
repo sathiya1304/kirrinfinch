@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kirrin Finch — Dress to Impress</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Barlow', sans-serif;
+      color: #1a1a1a;
+      overflow-x: hidden;
+    }
+
+    /* ── ANNOUNCEMENT BAR ── */
+    .announcement-bar {
+      background: #111;
+      color: #fff;
+      text-align: center;
+      padding: 9px 48px;
+      font-size: 11.5px;
+      letter-spacing: 0.12em;
+      font-weight: 400;
+      position: relative;
+    }
+    .announcement-bar a {
+      color: #fff;
+      text-decoration: none;
+    }
+    .announcement-close {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 18px;
+      line-height: 1;
+      cursor: pointer;
+      opacity: 0.7;
+    }
+    .announcement-close:hover { opacity: 1; }
+
+    /* ── NAVBAR ── */
+    .navbar {
+      background: #fff;
+      border-bottom: 1px solid #e8e8e8;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .navbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 68px;
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+    .nav-logo {
+      text-decoration: none;
+      color: #1a1a1a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      line-height: 1;
+    }
+    .nav-logo-mark {
+      width: 28px;
+      height: 28px;
+      margin-bottom: 3px;
+    }
+    .nav-logo-text {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      list-style: none;
+    }
+    .nav-links li a {
+      font-size: 10.5px;
+      font-weight: 500;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #1a1a1a;
+      padding: 0 11px;
+      white-space: nowrap;
+    }
+    .nav-links li a:hover { text-decoration: underline; }
+    .nav-icons {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .nav-icons button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+    }
+    .nav-icons svg {
+      width: 19px;
+      height: 19px;
+      fill: none;
+      stroke: #1a1a1a;
+      stroke-width: 1.6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: #1a1a1a;
+    }
+
+    /* Mobile nav overlay */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: #fff;
+      z-index: 200;
+      flex-direction: column;
+      padding: 64px 40px 40px;
+      gap: 24px;
+      overflow-y: auto;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #1a1a1a;
+      border-bottom: 1px solid #f0f0f0;
+      padding-bottom: 20px;
+    }
+    .mobile-nav-close {
+      position: absolute;
+      top: 18px;
+      right: 24px;
+      background: none;
+      border: none;
+      font-size: 26px;
+      cursor: pointer;
+      color: #1a1a1a;
+      line-height: 1;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: #e5d2be;
+      position: relative;
+      height: 620px;
+      overflow: hidden;
+    }
+    .hero-content {
+      position: absolute;
+      left: 80px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+      max-width: 340px;
+    }
+    .hero-label {
+      font-size: 10.5px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #6b5648;
+      margin-bottom: 14px;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 76px;
+      font-weight: 400;
+      font-style: italic;
+      color: #1a1a1a;
+      line-height: 1.05;
+      margin-bottom: 28px;
+    }
+    .btn-outline-dark {
+      display: inline-block;
+      padding: 11px 26px;
+      border: 1.5px solid #1a1a1a;
+      background: transparent;
+      color: #1a1a1a;
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-outline-dark:hover { background: #1a1a1a; color: #fff; }
+    .hero-image {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 62%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+    }
+
+    /* ── MARQUEE ── */
+    .marquee-section {
+      background: #fff;
+      border-top: 1px solid #e8e8e8;
+      border-bottom: 1px solid #e8e8e8;
+      padding: 13px 0;
+      overflow: hidden;
+    }
+    .marquee-track {
+      display: flex;
+      animation: scrollLeft 22s linear infinite;
+      white-space: nowrap;
+    }
+    .marquee-track:hover { animation-play-state: paused; }
+    .marquee-item {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: #1a1a1a;
+      flex-shrink: 0;
+      padding: 0 28px;
+    }
+    .marquee-sep {
+      font-size: 11px;
+      color: #bbb;
+      flex-shrink: 0;
+      align-self: center;
+    }
+    @keyframes scrollLeft {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ── 3-COL PRODUCT GRID ── */
+    .product-grid-section { background: #fff; }
+    .three-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 3px;
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+    .product-tile { overflow: hidden; }
+    .product-tile img {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    .product-tile:hover img { transform: scale(1.03); }
+    .product-tile-label {
+      display: block;
+      text-align: center;
+      padding: 15px 0 6px;
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #1a1a1a;
+    }
+
+    /* ── WEDDING BANNER ── */
+    .wedding-banner {
+      position: relative;
+      height: 560px;
+      overflow: hidden;
+    }
+    .wedding-banner > img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+      display: block;
+    }
+    .wedding-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.22);
+    }
+    .wedding-content {
+      position: absolute;
+      left: 80px;
+      bottom: 72px;
+      color: #fff;
+    }
+    .section-eyebrow {
+      font-size: 10.5px;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      opacity: 0.9;
+    }
+    .wedding-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 58px;
+      font-weight: 400;
+      line-height: 1.08;
+      margin-bottom: 26px;
+    }
+    .btn-outline-white {
+      display: inline-block;
+      padding: 11px 22px;
+      border: 1.5px solid #fff;
+      background: transparent;
+      color: #fff;
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-outline-white:hover { background: #fff; color: #1a1a1a; }
+    .chat-bubble {
+      position: absolute;
+      right: 40px;
+      bottom: 72px;
+      background: #fff;
+      color: #1a1a1a;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 3px;
+      font-size: 12.5px;
+      font-weight: 500;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .chat-bubble svg {
+      width: 15px;
+      height: 15px;
+      fill: none;
+      stroke: #1a1a1a;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* ── 4-COL CATEGORY GRID ── */
+    .category-grid-section { background: #fff; }
+    .four-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 3px;
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+    .category-tile { overflow: hidden; }
+    .category-tile img {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    .category-tile:hover img { transform: scale(1.03); }
+    .category-tile-label {
+      display: block;
+      text-align: center;
+      padding: 13px 0 5px;
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #1a1a1a;
+    }
+
+    /* ── LIFESTYLE BANNER ── */
+    .lifestyle-banner {
+      position: relative;
+      height: 560px;
+      overflow: hidden;
+    }
+    .lifestyle-banner > img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+    .lifestyle-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.32);
+    }
+    .lifestyle-content {
+      position: absolute;
+      left: 80px;
+      bottom: 72px;
+      color: #fff;
+    }
+    .lifestyle-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 66px;
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.05;
+      margin-bottom: 26px;
+    }
+
+    /* ── 2-COL EDITORIAL ── */
+    .editorial-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3px;
+    }
+    .editorial-tile {
+      position: relative;
+      overflow: hidden;
+    }
+    .editorial-tile img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      display: block;
+    }
+    .editorial-tile-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 55%);
+    }
+    .editorial-tile-text {
+      position: absolute;
+      bottom: 30px;
+      left: 30px;
+      color: #fff;
+    }
+    .editorial-tile-text h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 38px;
+      font-weight: 400;
+      line-height: 1.15;
+    }
+
+    /* ── PRESS / FEATURED IN ── */
+    .press-section {
+      background: #fff;
+      padding: 56px 40px;
+      text-align: center;
+    }
+    .press-heading {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 36px;
+    }
+    .press-logos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 44px;
+      flex-wrap: wrap;
+    }
+    .press-logos img {
+      height: 26px;
+      object-fit: contain;
+      filter: grayscale(1);
+      opacity: 0.6;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: #1b1c2c;
+      color: #aaa;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr 1fr 1fr;
+      gap: 40px;
+      padding: 56px 80px 52px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+    .footer-signup-title {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.45;
+      margin-bottom: 6px;
+    }
+    .footer-signup-sub {
+      font-size: 12.5px;
+      color: #888;
+      margin-bottom: 20px;
+    }
+    .email-form {
+      display: flex;
+    }
+    .email-form input {
+      flex: 1;
+      padding: 10px 14px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-right: none;
+      color: #fff;
+      font-size: 12px;
+      font-family: 'Barlow', sans-serif;
+      outline: none;
+    }
+    .email-form input::placeholder { color: #666; }
+    .email-form button {
+      padding: 10px 18px;
+      background: #fff;
+      color: #1b1c2c;
+      border: none;
+      font-size: 10.5px;
+      font-weight: 700;
+      font-family: 'Barlow', sans-serif;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .email-form button:hover { background: #e8e8e8; }
+    .footer-col h4 {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul li a {
+      font-size: 12.5px;
+      color: #888;
+      text-decoration: none;
+    }
+    .footer-col ul li a:hover { color: #fff; }
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 80px;
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+    .footer-copyright {
+      font-size: 10.5px;
+      color: #555;
+      line-height: 1.6;
+    }
+    .footer-copyright a { color: #555; text-decoration: none; }
+    .footer-copyright a:hover { color: #aaa; }
+    .footer-social {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .footer-social a {
+      color: #888;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+    .footer-social a:hover { color: #fff; }
+    .footer-social svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .hero { height: 520px; }
+      .hero-title { font-size: 58px; }
+      .nav-links li a { padding: 0 7px; font-size: 9.5px; }
+      .footer-top { grid-template-columns: 1fr 1fr; padding: 48px 40px 44px; }
+      .footer-bottom { padding: 18px 40px; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+
+      .hero { height: 420px; }
+      .hero-content { left: 28px; max-width: 260px; }
+      .hero-title { font-size: 44px; }
+      .hero-image { width: 100%; opacity: 0.45; }
+
+      .three-col { grid-template-columns: 1fr; }
+      .four-col { grid-template-columns: 1fr 1fr; }
+      .editorial-grid { grid-template-columns: 1fr; }
+
+      .wedding-content { left: 28px; bottom: 40px; }
+      .wedding-title { font-size: 40px; }
+      .chat-bubble { display: none; }
+
+      .lifestyle-content { left: 28px; bottom: 40px; }
+      .lifestyle-title { font-size: 46px; }
+
+      .footer-top { grid-template-columns: 1fr; padding: 40px 28px 36px; }
+      .footer-bottom { padding: 18px 28px; flex-direction: column; gap: 14px; text-align: center; }
+    }
+
+    @media (max-width: 480px) {
+      .navbar-inner { padding: 0 20px; }
+      .hero-title { font-size: 36px; }
+      .four-col { grid-template-columns: 1fr; }
+      .wedding-title { font-size: 32px; }
+      .lifestyle-title { font-size: 36px; }
+      .press-logos { gap: 22px; }
+      .press-logos img { height: 20px; }
+      .editorial-tile-text h3 { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ANNOUNCEMENT BAR -->
+<div class="announcement-bar" id="announcementBar">
+  NEW ARRIVALS JUST DROPPED! <a href="#">SHOP NOW &rsaquo;</a>
+  <button class="announcement-close" onclick="document.getElementById('announcementBar').remove()">&times;</button>
+</div>
+
+<!-- NAVBAR -->
+<header class="navbar">
+  <nav class="navbar-inner">
+    <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+
+    <a href="#" class="nav-logo">
+      <!-- Kirrin Finch logomark SVG approximation -->
+      <svg class="nav-logo-mark" viewBox="0 0 28 28" fill="none">
+        <rect x="4" y="4" width="20" height="20" rx="2" stroke="#1a1a1a" stroke-width="1.4"/>
+        <path d="M9 14h10M14 9v10" stroke="#1a1a1a" stroke-width="1.4" stroke-linecap="round"/>
+        <circle cx="14" cy="14" r="3" stroke="#1a1a1a" stroke-width="1.2"/>
+      </svg>
+      <span class="nav-logo-text">Kirrin Finch</span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#">Featured</a></li>
+      <li><a href="#">Suits &amp; Blazers</a></li>
+      <li><a href="#">Pants &amp; Shorts</a></li>
+      <li><a href="#">Shirts</a></li>
+      <li><a href="#">Knits</a></li>
+      <li><a href="#">Outerwear</a></li>
+      <li><a href="#">Accessories</a></li>
+      <li><a href="#">Journal</a></li>
+      <li><a href="#">Pre-Loved</a></li>
+    </ul>
+
+    <div class="nav-icons">
+      <button aria-label="Search">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+      <button aria-label="Account">
+        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </button>
+      <button aria-label="Cart">
+        <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<!-- MOBILE NAV -->
+<nav class="mobile-nav" id="mobileNav">
+  <button class="mobile-nav-close" id="mobileNavClose">&times;</button>
+  <a href="#">Featured</a>
+  <a href="#">Suits &amp; Blazers</a>
+  <a href="#">Pants &amp; Shorts</a>
+  <a href="#">Shirts</a>
+  <a href="#">Knits</a>
+  <a href="#">Outerwear</a>
+  <a href="#">Accessories</a>
+  <a href="#">Journal</a>
+  <a href="#">Pre-Loved</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <p class="hero-label">Dress to Impress</p>
+    <h1 class="hero-title">Spring Styles</h1>
+    <a href="#" class="btn-outline-dark">Shop Now</a>
+  </div>
+  <img
+    class="hero-image"
+    src="https://kirrinfinch.com/cdn/shop/files/2026_3_KirrinFinch_Studio_1867_1.png?v=1774298020&width=1440"
+    alt="Spring Styles"
+  >
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-section">
+  <div class="marquee-track">
+    <!-- duplicated for seamless loop -->
+    <span class="marquee-item">Wear Your Truth</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
+    <span class="marquee-item">Wear Your Truth</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
+    <span class="marquee-item">Wear Your Truth</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
+    <span class="marquee-item">Wear Your Truth</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
+    <span class="marquee-item">Wear Your Truth</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
+    <span class="marquee-item">Wear Your Truth</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
+    <span class="marquee-item">Wear Your Truth</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
+    <span class="marquee-item">Wear Your Truth</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
+    <span class="marquee-item">Wear Your Truth</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
+    <span class="marquee-item">Wear Your Truth</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
+    <span class="marquee-item">Wear Your Truth</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
+    <span class="marquee-item">Wear Your Truth</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
+    <span class="marquee-item">Wear Your Truth</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
+    <span class="marquee-item">Wear Your Truth</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
+    <span class="marquee-item">Wear Your Truth</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
+    <span class="marquee-item">Wear Your Truth</span><span class="marquee-sep">&nbsp;·&nbsp;</span>
+  </div>
+</div>
+
+<!-- 3-COLUMN PRODUCT GRID -->
+<section class="product-grid-section">
+  <div class="three-col">
+    <div class="product-tile">
+      <img src="https://kirrinfinch.com/cdn/shop/files/Spring_new_arrivals_1.png?v=1775851299&width=800" alt="New Arrivals">
+      <a href="#" class="product-tile-label">Shop New Arrivals</a>
+    </div>
+    <div class="product-tile">
+      <img src="https://kirrinfinch.com/cdn/shop/files/Georgie_78c52b5f-2179-4c74-bf9b-235b2072fec5.png?v=1775770324&width=800" alt="Best Sellers">
+      <a href="#" class="product-tile-label">Shop Best Sellers</a>
+    </div>
+    <div class="product-tile">
+      <img src="https://kirrinfinch.com/cdn/shop/files/Spring_new_arrivals_pride_2.png?v=1775847154&width=800" alt="Suiting">
+      <a href="#" class="product-tile-label">Shop Suiting</a>
+    </div>
+  </div>
+</section>
+
+<!-- WEDDING BANNER -->
+<section class="wedding-banner">
+  <img src="https://kirrinfinch.com/cdn/shop/files/HP_WEDDING_emerald_tux_2.png?v=1774632398&width=1440" alt="Wedding Collection">
+  <div class="wedding-overlay"></div>
+  <div class="wedding-content">
+    <p class="section-eyebrow">Love Out Loud</p>
+    <h2 class="wedding-title">Weddings, Your Way</h2>
+    <a href="#" class="btn-outline-white">Shop Wedding Collection</a>
+  </div>
+  <div class="chat-bubble">
+    <svg viewBox="0 0 24 24">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+    </svg>
+    Chat with us
+  </div>
+</section>
+
+<!-- 4-COLUMN CATEGORY GRID -->
+<section class="category-grid-section">
+  <div class="four-col">
+    <div class="category-tile">
+      <img src="https://kirrinfinch.com/cdn/shop/files/Tops_Georgie_2.png?v=1775852374&width=600" alt="Tops">
+      <span class="category-tile-label">Tops</span>
+    </div>
+    <div class="category-tile">
+      <img src="https://kirrinfinch.com/cdn/shop/files/Bottoms_fall_es.png?v=1761684498&width=600" alt="Bottoms">
+      <span class="category-tile-label">Bottoms</span>
+    </div>
+    <div class="category-tile">
+      <img src="https://kirrinfinch.com/cdn/shop/files/Tops_Georgie_1_1.png?v=1775851527&width=600" alt="Extended Lengths + Sizes">
+      <span class="category-tile-label">Extended Lengths + Sizes</span>
+    </div>
+    <div class="category-tile">
+      <img src="https://kirrinfinch.com/cdn/shop/files/Tops_Georgie.png?v=1775841921&width=600" alt="Last Chance">
+      <span class="category-tile-label">Last Chance</span>
+    </div>
+  </div>
+</section>
+
+<!-- LIFESTYLE BANNER -->
+<section class="lifestyle-banner">
+  <img src="https://kirrinfinch.com/cdn/shop/files/preview_images/755864751e06433691424a2178186fe7.thumbnail.0000000000.jpg?v=1727800710" alt="Be Authentically You">
+  <div class="lifestyle-overlay"></div>
+  <div class="lifestyle-content">
+    <h2 class="lifestyle-title">Be Authentically You</h2>
+    <a href="#" class="btn-outline-white">Shop Now</a>
+  </div>
+</section>
+
+<!-- 2-COLUMN EDITORIAL -->
+<section class="editorial-grid">
+  <div class="editorial-tile">
+    <img src="https://kirrinfinch.com/cdn/shop/files/Real_Weddings_Stacy_Annie.png?v=1764107574&width=800" alt="Real Weddings">
+    <div class="editorial-tile-overlay"></div>
+    <div class="editorial-tile-text">
+      <h3>Real Weddings</h3>
+    </div>
+  </div>
+  <div class="editorial-tile">
+    <img src="https://kirrinfinch.com/cdn/shop/files/Retouched_Barak_Shrama-edited_highres_proofs-4__2.jpg?v=1769210240&width=800" alt="Dapper Scouts">
+    <div class="editorial-tile-overlay"></div>
+    <div class="editorial-tile-text">
+      <h3>Dapper Scouts</h3>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED IN -->
+<section class="press-section">
+  <p class="press-heading">Featured In:</p>
+  <div class="press-logos">
+    <img src="https://kirrinfinch.com/cdn/shop/files/Cosmopolitan_logo_wordmark_logotype.png?v=1613172211&width=300" alt="Cosmopolitan">
+    <img src="https://kirrinfinch.com/cdn/shop/files/Vice_logo.svg_f7c2c31e-4d3e-4ca7-80f1-887cfc204b67.png?v=1613162919&width=300" alt="VICE">
+    <img src="https://kirrinfinch.com/cdn/shop/files/DQ_Logo_small_f176b662-a32a-4058-9cc1-2b360030d85d.png?v=1613162919&width=300" alt="Dapper'd">
+    <img src="https://kirrinfinch.com/cdn/shop/files/fastcompany_logo1.png?v=1613162919&width=300" alt="Fast Company">
+    <img src="https://kirrinfinch.com/cdn/shop/files/logo-bustle.png?v=1618855415&width=300" alt="Bustle">
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-top">
+    <div>
+      <p class="footer-signup-title">Want exclusive offers and first access to products?</p>
+      <p class="footer-signup-sub">Sign up for email alerts</p>
+      <div class="email-form">
+        <input type="email" placeholder="Email address" aria-label="Email address">
+        <button type="submit">Sign Up</button>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Support</h4>
+      <ul>
+        <li><a href="#">Help Center</a></li>
+        <li><a href="#">Return or Exchange</a></li>
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="#">Shipping &amp; Returns</a></li>
+        <li><a href="#">Garment Care</a></li>
+        <li><a href="#">Accessibility</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Dapper Scouts</a></li>
+        <li><a href="#">Garment Care</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>About</h4>
+      <ul>
+        <li><a href="#">Our Story</a></li>
+        <li><a href="#">Social Giveback</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Reviews</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p class="footer-copyright">
+      &copy; 2024 Kirrin Finch. Powered by Shopify &nbsp;&nbsp;
+      <a href="#">Refund policy</a> &nbsp;&nbsp;
+      <a href="#">Privacy policy</a> &nbsp;&nbsp;
+      <a href="#">Terms of service</a> &nbsp;&nbsp;
+      <a href="#">Shipping policy</a> &nbsp;&nbsp;
+      <a href="#">Contact information</a>
+    </p>
+    <div class="footer-social">
+      <!-- Instagram -->
+      <a href="#" aria-label="Instagram">
+        <svg fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none"/>
+        </svg>
+      </a>
+      <!-- Facebook -->
+      <a href="#" aria-label="Facebook">
+        <svg fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+        </svg>
+      </a>
+      <!-- TikTok -->
+      <a href="#" aria-label="TikTok">
+        <svg fill="currentColor" viewBox="0 0 24 24">
+          <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.15 8.15 0 0 0 4.77 1.53V6.75a4.85 4.85 0 0 1-1-.06z"/>
+        </svg>
+      </a>
+      <!-- YouTube -->
+      <a href="#" aria-label="YouTube">
+        <svg fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/>
+          <polygon fill="currentColor" stroke="none" points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const mobileNav    = document.getElementById('mobileNav');
+  const mobileClose  = document.getElementById('mobileNavClose');
+  hamburgerBtn.addEventListener('click', () => mobileNav.classList.add('open'));
+  mobileClose.addEventListener('click',  () => mobileNav.classList.remove('open'));
+</script>
+
+</body>
+</html>
